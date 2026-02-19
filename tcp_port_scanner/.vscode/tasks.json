@@ -1,0 +1,53 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build TCP Port Scanner",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-o",
+                "${fileDirname}\\port_scanner.exe",
+                "${fileDirname}\\port_scanner.cpp",
+                "-lws2_32",
+                "-std=c++17",
+                "-O2",
+                "-Wall"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ]
+        },
+        {
+            "label": "Run - Scan Localhost",
+            "type": "shell",
+            "command": "${fileDirname}\\port_scanner.exe",
+            "args": [
+                "127.0.0.1",
+                "-p",
+                "1-1024",
+                "-nb"
+            ],
+            "dependsOn": "Build TCP Port Scanner",
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "clear": true
+            }
+        }
+    ]
+}
